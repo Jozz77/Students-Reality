@@ -4,11 +4,21 @@ import Image from "next/image";
 import Stars from "./assets/Stars.png";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { GoEye, GoEyeClosed } from "react-icons/go";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = (e) => {
+    e.stopPropagation(); // Stop the event propagation
+    setShowPassword(!showPassword);
+  };
   // form validation
   const {
     register,
@@ -48,13 +58,29 @@ export default function Home() {
         value: 8,
         message: "Must be at least 8 characters.",
       },
+      pattern: {
+        value: /^(?=.*[a-z]).*$/,
+        message: "Password must contain at least one lowercase letter.",
+      },
+      pattern: {
+        value: /^(?=.*[A-Z]).*$/,
+        message: "Password must contain at least one uppercase letter.",
+      },
+      pattern: {
+        value: /^(?=.*\d).*$/,
+        message: "Password must contain at least one digit.",
+      },
+      pattern: {
+        value: /^(?=.*[^a-zA-Z\d\s]).*$/,
+        message: "Password must contain at least one non-alphanumeric character.",
+      },
     },
   };
 
   const handleApiSubmit = async (data) => {
     console.log("Input: ", data)
     setLoading(true);
-    const url = "https://devapi.omacart.com/signupapi/signup";
+    const url = "https://devapi.omacart.com/signup";
 
     try {
       const response = await axios.post(url, data, {
@@ -64,7 +90,12 @@ export default function Home() {
       });
       const user = response.data.data;
       console.log("user: ", user);
-      navigate("/");
+      // Display a message for 5 seconds
+    setMessage("User registered successfully. Redirecting to login page...");
+    setTimeout(() => {
+      setMessage("");
+      router.push("/login");
+    }, 5000);
       setLoading(false);
 
     } catch (error) {
@@ -97,10 +128,10 @@ export default function Home() {
           onSubmit={handleSubmit(handleApiSubmit, handleError)}
           className="  mt-8 lg:mt-12"
         >
-          <div className=" flex flex-col gap-4 xxl:gap-5 text-base sm:text-[0.9rem] lg:text-base">
+          <div className=" flex flex-col gap-4 xxl:gap-5 text-base sm:text-[0.9rem] xxl:text-base">
             <section>
               <label className=" font-medium text-[0.9rem] sm:text-[0.8rem] lg:text-[0.9rem] " htmlFor="Name">
-                First Name*
+                Name*
               </label>
               <input
                 type="text"
@@ -114,22 +145,6 @@ export default function Home() {
                 {errors?.firstname && errors.firstname.message}
               </small>
             </section>
-            {/* <section>
-              <label className=" font-medium text-[0.9rem] " htmlFor="lastname">
-                Last Name*
-              </label>
-              <input
-                type="text"
-                name=""
-                id="lastname"
-                className=" mt-1 w-full border border-[#D0D5DD] rounded-[8px] py-2 px-[3%] text-Gray500 outline-none placeholder:text-Gray500 "
-                placeholder="Enter your name"
-                {...register("lastname", registerOptions.lastname)}
-              />
-              <small className=" text-Gray600 ">
-                {errors?.lastname && errors.lastname.message}
-              </small>
-            </section> */}
             <section>
               <label className=" font-medium text-[0.8rem] lg:text-[0.9rem] " htmlFor="email">
                 Email*
@@ -150,14 +165,30 @@ export default function Home() {
               <label className=" font-medium text-[0.8rem] lg:text-[0.9rem] " htmlFor="password">
                 Password*
               </label>
+              <div className=" relative">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name=""
                 id="password"
                 className=" mt-1 w-full border border-[#D0D5DD] rounded-[8px] py-2 px-[3%] text-Gray500 outline-none placeholder:text-Gray500 "
                 placeholder="Enter your password"
                 {...register("password", registerOptions.password)}
               />
+              <span
+                className=" absolute translate-y-[-50%] top-[50%] right-[5%] cursor-pointer"
+                onClick={(e) => togglePasswordVisibility(e)}
+              >
+                {showPassword ? (
+                  <div>
+                    <GoEye />
+                  </div>
+                ) : (
+                  <div>
+                    <GoEyeClosed />
+                  </div>
+                )}
+              </span>
+              </div>
               <small className=" text-Gray600 ">
                 {errors?.password && errors.password.message}
               </small>
@@ -180,7 +211,13 @@ export default function Home() {
             </Link>
           </section>
         </form>
+
+        <div className=" flex justify-center mt-4">
+        {message}
+      </div>
       </section>
+
+      
     </main>
   );
 }
