@@ -18,4 +18,4 @@ To get a local copy up and running follow these simple steps.
 ### Clone the repository
 
 ```bash
-git clone <repository_url>
+git clone (https://github.com/Jozz77/Students-Reality.git)
