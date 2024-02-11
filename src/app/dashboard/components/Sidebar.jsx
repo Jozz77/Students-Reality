@@ -7,15 +7,15 @@ import Image from 'next/image';
 
 export default function Sidebar() {
   return (
-    <div className=' fixed top-0 bottom-0 px-[2%]  w-[20%] bg-ButtonColor h-[100vh] '>
-      <section className=' relative text-[0.95rem] xxl:text-base text-NormalWhite mt-12 xxl:mt-16 '>
-        <input type="text" className=' rounded-[6px] w-full outline-none py-2 pl-[15%]  bg-Gray700 placeholder:text-NormalWhite ' name="" id="" placeholder='Search' />
-        <div className=' absolute left-[3%] top-[50%] translate-y-[-50%] '>
+    <div className=' hidden sm:block fixed top-0 bottom-0 px-[2%]  w-[20%] bg-ButtonColor h-[100vh] '>
+      <section className=' relative text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-NormalWhite mt-12 xxl:mt-16 '>
+        <input type="text" className=' rounded-[6px] w-full outline-none py-1 lg:py-2 pl-[20%] lg:pl-[15%]  bg-Gray700 placeholder:text-NormalWhite ' name="" id="" placeholder='Search' />
+        <div className=' absolute left-[5%] lg:left-[3%] top-[50%] translate-y-[-50%] '>
         <FiSearch />
         </div>
       </section>
  
-      <section className=' mt-4 flex flex-col py-4 gap-4 text-[0.95rem] xxl:text-base text-Gray100 font-semibold'>
+      <section className=' mt-4 flex flex-col py-4 gap-4 text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-Gray100 font-semibold'>
         <Link href='/dashboard' className=' flex gap-2 items-center '>
             <div className=' text-[1.1rem] '>
             <RiHome6Line />
@@ -44,7 +44,7 @@ export default function Sidebar() {
       </section>
 
       {/* down part */}
-     <div className=' absolute bottom-[5%] text-[0.95rem] xxl:text-base flex flex-col gap-5 xxl:gap-6 '>
+     <div className=' absolute bottom-[5%] text-[0.7rem] md:text-[0.8rem] lg:text-[0.95rem] xxl:text-base flex flex-col gap-5 xxl:gap-6 '>
      <section className=' mt-10 flex flex-col gap-4 text-Gray100 font-semibold'>
         <Link href='/dashboard' className=' flex gap-2 items-center '>
             <div className=' text-[1.1rem] '>
@@ -65,8 +65,8 @@ export default function Sidebar() {
         <div>
             <Image src={Avatar} className=' w-full' alt='Profile Image' />
         </div>
-        <div className=' text-[0.85rem] xxl:text-[0.9rem]'>
-            <h4>Ayele Tutor Center</h4>
+        <div className=' text-[0.65rem] md:text-[0.75rem] lg:text-[0.85rem] xxl:text-[0.9rem]'>
+            <h4>Ayele Tutor</h4>
             <small className=''>ayele@tutor.com</small>
         </div>
         </div>
