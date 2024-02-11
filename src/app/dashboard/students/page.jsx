@@ -8,15 +8,28 @@ import { IoFilterSharp } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
 import { StudentsData } from "../StudentsData";
 import { GiHamburgerMenu } from "react-icons/gi";
+import Image from "next/image";
+import Avatar from "../assets/Avatar.png";
 
 export default function students() {
   return (
     <DashboardLayout>
-      <main className="overflow-x-auto  bg-NormalWhite  rounded-l-[40px] h-[100vh] pt-6 xxl:pt-8 px-[3%] ">
-        <section className=" flex justify-between items-center">
-          <div className=" block sm:hidden">
+      <main className="overflow-x-auto bg-NormalWhite  rounded-l-[40px] h-[100vh] pt-6 xxl:pt-8 px-[3%] ">
+        <section className="flex justify-between sm:hidden">
+          <div className=" text-[1.5rem] ">
             <GiHamburgerMenu />
           </div>
+          <div className=" flex gap-2 items-center ">
+            <div>
+              <Image src={Avatar} className=" w-full" alt="Profile Image" />
+            </div>
+            <div className=" text-[0.65rem] md:text-[0.75rem] lg:text-[0.85rem] xxl:text-[0.9rem]">
+              <h4>Ayele Tutor</h4>
+              <small className="">ayele@tutor.com</small>
+            </div>
+          </div>
+        </section>
+        <section className=" flex justify-between items-center">
           <div>
             <h1 className=" font-semibold text-[1.4rem] md:text-[1.5rem] lg:text-[1.7rem] xxl:text-[1.9rem] ">
               Students
@@ -26,7 +39,9 @@ export default function students() {
             </p>
           </div>
           <div className=" text-[0.7rem] md:text-[0.75rem] xl:text-[0.8rem] xxl:text-[0.9rem] items-center font-medium cursor-pointer flex gap-2 rounded-[6px] bg-ButtonColor text-NormalWhite py-2 px-2 md:px-3 xl:px-4 ">
-            <div className=" text-[0.9rem] md:text-[1rem] xl:text-[1.1rem]"><FiPlus /></div>
+            <div className=" text-[0.9rem] md:text-[1rem] xl:text-[1.1rem]">
+              <FiPlus />
+            </div>
             <p>Add Students</p>
           </div>
         </section>
@@ -76,50 +91,58 @@ export default function students() {
               </div>
             </section>
           </div>
-          <table className=" table-auto w-full text-left text-Gray500 text-[0.65rem] md:text-[0.7rem] lg:text-[0.75rem] xl:text-[0.8rem]">
-            <thead className=" bg-Gray50   font-medium  ">
-              <tr className=" justify-around border-Gray200 border-t-[1px] border-solid  ">
-                <th className=" flex gap-2 ml-[6%] py-2 ">
-                  <input type="checkbox" name="" id="checkbox" />
-                  <label htmlFor="checkbox">Description</label>
-                </th>
-                <th className=" ">Course</th>
-                <th>Date Joined</th>
-                <th className="  pl-4 lg:pl-6 ">Cohort</th>
-                <th className="  pl-4 lg:pl-6 ">Status</th>
-                <th className="  pl-10 lg:pl-16 "></th>
-              </tr>
-            </thead>
-            <tbody className=" ">
-              {StudentsData.map((student) => (
-                <tr key={student.id} className="border-Gray200 border-t-[1px] border-solid justify-between ">
-                  <td className="px-[6%]  text-Gray900 py-4 flex gap-2">
-                    <input type="checkbox" name="" id={student.id} />
-                    <label htmlFor={student.id} className="font-medium">
-                      {student.name}
-                    </label>
-                  </td>
-                  <td>{student.course}</td>
-                  <td>{student.date}</td>
-                  <td className="  pl-4 lg:pl-6 ">{student.cohort}</td>
-                  <td className="relative pl-4 lg:pl-6 ">
-                    <div className={` absolute flex gap-1 py-1 px-2 top-[50%] translate-y-[-50%] items-center rounded-[16px] ${
-                      student.status === "Inactive" ? 'bg-Warning50 text-Warning700 '
-                      : "bg-[#ECFDF3] text-[#049B77] "
-                    }`}>
-                      <div className=" text-[0.9rem] ">
-                        <IoMdCheckmark />
-                      </div>
-                      {student.status}
-                    </div>
-                  </td>
-                  <td className=" text-[1.2rem] pl-10 lg:pl-16 ">
-                    <BiDotsVerticalRounded />
-                  </td>
+          <div className="overflow-x-auto ">
+            <table className=" table-auto w-[640px] sm:w-full text-left text-Gray500 text-[0.65rem] md:text-[0.7rem] lg:text-[0.75rem] xl:text-[0.8rem]">
+              <thead className=" bg-Gray50    font-medium  ">
+                <tr className=" justify-around border-Gray200 border-t-[1px] border-solid  ">
+                  <th className=" flex gap-2 ml-[6%] py-2 ">
+                    <input type="checkbox" name="" id="checkbox" />
+                    <label htmlFor="checkbox">Description</label>
+                  </th>
+                  <th className=" ">Course</th>
+                  <th>Date Joined</th>
+                  <th className="  pl-4 lg:pl-6 ">Cohort</th>
+                  <th className="  pl-4 lg:pl-6 ">Status</th>
+                  <th className="  pl-10 lg:pl-16 "></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className=" ">
+                {StudentsData.map((student) => (
+                  <tr
+                    key={student.id}
+                    className="border-Gray200 border-t-[1px] border-solid justify-between "
+                  >
+                    <td className="px-[6%]  text-Gray900 py-4 flex gap-2">
+                      <input type="checkbox" name="" id={student.id} />
+                      <label htmlFor={student.id} className="font-medium">
+                        {student.name}
+                      </label>
+                    </td>
+                    <td>{student.course}</td>
+                    <td>{student.date}</td>
+                    <td className="  pl-4 lg:pl-6 ">{student.cohort}</td>
+                    <td className="relative pl-4 lg:pl-6 ">
+                      <div
+                        className={` absolute flex gap-1 py-1 px-2 top-[50%] translate-y-[-50%] items-center rounded-[16px] ${
+                          student.status === "Inactive"
+                            ? "bg-Warning50 text-Warning700 "
+                            : "bg-[#ECFDF3] text-[#049B77] "
+                        }`}
+                      >
+                        <div className=" text-[0.9rem] ">
+                          <IoMdCheckmark />
+                        </div>
+                        {student.status}
+                      </div>
+                    </td>
+                    <td className=" text-[1.2rem] pl-10 lg:pl-16 ">
+                      <BiDotsVerticalRounded />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section className="mt-8 xxl:mt-10 relative mb-16 ">
@@ -130,13 +153,27 @@ export default function students() {
               </div>
               Previous
             </button>
-            <button  className="py-2 px-3 md:px-4 text-center bg-Gray50 border-Gray200 border-r-[1px] border-solid">1</button>
-            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">2</button>
-            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">3</button>
-            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">...</button>
-            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">8</button>
-            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">9</button>
-            <button className="py-2 px-2 md:py-3 text-center border-Gray200 border-r-[1px] border-solid">10</button>
+            <button className="py-2 px-3 md:px-4 text-center bg-Gray50 border-Gray200 border-r-[1px] border-solid">
+              1
+            </button>
+            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">
+              2
+            </button>
+            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">
+              3
+            </button>
+            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">
+              ...
+            </button>
+            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">
+              8
+            </button>
+            <button className="py-2 px-3 md:px-4 text-center border-Gray200 border-r-[1px] border-solid">
+              9
+            </button>
+            <button className="py-2 px-2 md:py-3 text-center border-Gray200 border-r-[1px] border-solid">
+              10
+            </button>
             <button className=" flex gap-2 items-center py-2 px-2 md:py-3">
               Next
               <div>
