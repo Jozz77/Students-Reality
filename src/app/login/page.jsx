@@ -77,7 +77,8 @@ export default function page() {
       });
       const user = response.data.response;
       console.log("user: ", user);
-      router.push("/dashboard");
+      router.push("/dashboard/students");
+      localStorage.setItem("user", JSON.stringify(user));
       setLoading(false);
 
     } catch (error) {

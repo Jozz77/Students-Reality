@@ -1,11 +1,21 @@
+'use client'
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { RiHome6Line } from "react-icons/ri";
 import Avatar from "../assets/Avatar.png";
 import Image from "next/image";
 
 export default function Sidebar() {
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    // Retrieve user data from localStorage
+    const user = localStorage.getItem("user");
+    console.log(JSON.parse(user));
+    setUser(JSON.parse(user)); 
+}, []);
   return (
     <div className=" hidden sm:block fixed top-0 bottom-0 px-[2%]  w-[20%] bg-ButtonColor h-[100vh] ">
       <section className=" relative text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-NormalWhite mt-12 xxl:mt-16 ">
@@ -67,12 +77,12 @@ export default function Sidebar() {
 
         <section className=" pt-4 xxl:pt-5 border-solid border-Gray600 border-t-[1px] text-Gray100">
           <div className=" flex gap-2 items-center ">
-            <div>
+            <div className=" w-[2rem] ">
               <Image src={Avatar} className=" w-full" alt="Profile Image" />
             </div>
             <div className=" text-[0.65rem] md:text-[0.75rem] lg:text-[0.85rem] xxl:text-[0.9rem]">
-              <h4>Ayele Tutor</h4>
-              <small className="">ayele@tutor.com</small>
+              <h4>{user.firstName}</h4>
+              <small className="">{user.email}</small>
             </div>
           </div>
         </section>
