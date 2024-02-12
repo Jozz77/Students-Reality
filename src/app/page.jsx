@@ -8,6 +8,7 @@ import { GoEye, GoEyeClosed } from "react-icons/go";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -72,13 +73,14 @@ export default function Home() {
       },
       pattern: {
         value: /^(?=.*[^a-zA-Z\d\s]).*$/,
-        message: "Password must contain at least one non-alphanumeric character.",
+        message:
+          "Password must contain at least one non-alphanumeric character.",
       },
     },
   };
 
   const handleApiSubmit = async (data) => {
-    console.log("Input: ", data)
+    console.log("Input: ", data);
     setLoading(true);
     const url = "https://devapi.omacart.com/signup";
 
@@ -91,13 +93,12 @@ export default function Home() {
       const user = response.data.data;
       console.log("user: ", user);
       // Display a message for 5 seconds
-    setMessage("User registered successfully. Redirecting to login page...");
-    setTimeout(() => {
-      setMessage("");
-      router.push("/login");
-    }, 5000);
+      setMessage("User registered successfully. Redirecting to login page...");
+      setTimeout(() => {
+        setMessage("");
+        router.push("/login");
+      }, 5000);
       setLoading(false);
-
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -122,7 +123,9 @@ export default function Home() {
       </section>
 
       <section className="  h-[100vh] sm:h-auto w-full sm:w-[42%] lg:w-[37%] flex flex-col justify-center px-[10%] sm:px-[3%] xl:px-[5%] ">
-        <h2 className=" font-semibold text-[1.9rem] sm:text-[1.7rem] lg:text-[1.9rem] text-Gray900 ">Sign up</h2>
+        <h2 className=" font-semibold text-[1.9rem] sm:text-[1.7rem] lg:text-[1.9rem] text-Gray900 ">
+          Sign up
+        </h2>
 
         <form
           onSubmit={handleSubmit(handleApiSubmit, handleError)}
@@ -130,7 +133,10 @@ export default function Home() {
         >
           <div className=" flex flex-col gap-4 xxl:gap-5 text-base sm:text-[0.9rem] xxl:text-base">
             <section>
-              <label className=" font-medium text-[0.9rem] sm:text-[0.8rem] lg:text-[0.9rem] " htmlFor="Name">
+              <label
+                className=" font-medium text-[0.9rem] sm:text-[0.8rem] lg:text-[0.9rem] "
+                htmlFor="Name"
+              >
                 Name*
               </label>
               <input
@@ -146,7 +152,10 @@ export default function Home() {
               </small>
             </section>
             <section>
-              <label className=" font-medium text-[0.8rem] lg:text-[0.9rem] " htmlFor="email">
+              <label
+                className=" font-medium text-[0.8rem] lg:text-[0.9rem] "
+                htmlFor="email"
+              >
                 Email*
               </label>
               <input
@@ -162,32 +171,35 @@ export default function Home() {
               </small>
             </section>
             <section>
-              <label className=" font-medium text-[0.8rem] lg:text-[0.9rem] " htmlFor="password">
+              <label
+                className=" font-medium text-[0.8rem] lg:text-[0.9rem] "
+                htmlFor="password"
+              >
                 Password*
               </label>
               <div className=" relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                name=""
-                id="password"
-                className=" mt-1 w-full border border-[#D0D5DD] rounded-[8px] py-2 px-[3%] text-Gray500 outline-none placeholder:text-Gray500 "
-                placeholder="Enter your password"
-                {...register("password", registerOptions.password)}
-              />
-              <span
-                className=" absolute translate-y-[-50%] top-[50%] right-[5%] cursor-pointer"
-                onClick={(e) => togglePasswordVisibility(e)}
-              >
-                {showPassword ? (
-                  <div>
-                    <GoEye />
-                  </div>
-                ) : (
-                  <div>
-                    <GoEyeClosed />
-                  </div>
-                )}
-              </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name=""
+                  id="password"
+                  className=" mt-1 w-full border border-[#D0D5DD] rounded-[8px] py-2 px-[3%] text-Gray500 outline-none placeholder:text-Gray500 "
+                  placeholder="Enter your password"
+                  {...register("password", registerOptions.password)}
+                />
+                <span
+                  className=" absolute translate-y-[-50%] top-[50%] right-[5%] cursor-pointer"
+                  onClick={(e) => togglePasswordVisibility(e)}
+                >
+                  {showPassword ? (
+                    <div>
+                      <GoEye />
+                    </div>
+                  ) : (
+                    <div>
+                      <GoEyeClosed />
+                    </div>
+                  )}
+                </span>
               </div>
               <small className=" text-Gray600 ">
                 {errors?.password && errors.password.message}
@@ -196,28 +208,41 @@ export default function Home() {
           </div>
 
           {loading ? (
-            <button className=" mt-12 xxl:mt-16 rounded-[8px] w-full hover:bg-Primary600 bg-ButtonColor text-NormalWhite py-2 text-base sm:text-[0.9rem] lg:text-base font-semibold">
-            Signing Up...
-          </button>
+            <div className=" flex justify-center mt-12 xxl:mt-16 rounded-[8px] w-full hover:bg-Primary600 bg-ButtonColor text-NormalWhite  text-base sm:text-[0.9rem] lg:text-base font-semibold">
+             <ThreeDots
+                visible={true}
+                height="40"
+                width="40"
+                color="#ffffff"
+                radius="9"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{
+                  // padding: "0"
+                }}
+                wrapperClass=""
+              />
+            </div>
           ) : (
             <button className=" mt-12 xxl:mt-16 rounded-[8px] w-full hover:bg-Primary600 bg-ButtonColor text-NormalWhite py-2 text-base sm:text-[0.9rem] lg:text-base font-semibold">
-            Get Started
-          </button>
+              Get Started
+            </button>
           )}
+          <div className=" text-ButtonColor flex text-[0.9rem] sm:text-[0.8rem] lg:text-[0.9rem] text-center justify-center mt-4">
+          <p> {message}</p>
+        </div>
           <section className=" text-[0.9rem] sm:text-[0.8rem] lg:text-[0.9rem] flex gap-1 justify-center mt-4 ">
             <p>Already have an account?</p>
-            <Link href="/login" className=" font-semibold hover:text-Primary600 text-ButtonColor">
+            <Link
+              href="/login"
+              className=" font-semibold hover:text-Primary600 text-ButtonColor"
+            >
               Log In
             </Link>
           </section>
         </form>
 
-        <div className=" flex justify-center mt-4">
-        {message}
-      </div>
+        
       </section>
-
-      
     </main>
   );
 }

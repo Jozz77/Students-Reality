@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function page() {
 
@@ -183,14 +184,30 @@ export default function page() {
               </span>
             </section>
            {loading ? (
-             <button className=" mt-12 rounded-[8px] w-full hover:bg-Primary600 bg-ButtonColor text-NormalWhite py-2 text-base sm:text-[0.9rem] lg:text-base font-semibold">
-             Logging In...
-           </button>
+              <div className=" flex justify-center mt-12 xxl:mt-16 rounded-[8px] w-full hover:bg-Primary600 bg-ButtonColor text-NormalWhite  text-base sm:text-[0.9rem] lg:text-base font-semibold">
+              <ThreeDots
+                 visible={true}
+                 height="40"
+                 width="40"
+                 color="#ffffff"
+                 radius="9"
+                 ariaLabel="three-dots-loading"
+                 wrapperStyle={{
+                   // padding: "0"
+                 }}
+                 wrapperClass=""
+               />
+             </div>
            ) : (
             <button className=" mt-12 rounded-[8px] w-full hover:bg-Primary600 bg-ButtonColor text-NormalWhite py-2 text-base sm:text-[0.9rem] lg:text-base font-semibold">
             Log In
           </button>
            )}
+           {error === 400 && (
+           <div className=" text-[0.9rem] flex justify-center sm:text-[0.8rem] lg:text-[0.9rem] text-red-700">
+              <p>Incorrect email or password</p>
+            </div>
+          )}  
             <section className=" text-[0.9rem] sm:text-[0.8rem] lg:text-[0.9rem] flex gap-1 justify-center mt-4 ">
               <p>Don't have an account?</p>
               <Link href="/" className=" font-semibold text-ButtonColor">
@@ -198,9 +215,7 @@ export default function page() {
               </Link>
             </section>
           </form>
-          {error === 400 && (
-            <div className=" text-red-700">Incorrect email or password</div>
-          )}
+          
         </div>
       </section>
 
