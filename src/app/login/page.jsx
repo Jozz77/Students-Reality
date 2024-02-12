@@ -100,7 +100,7 @@ export default function page() {
 
   return (
     <div className="flex  h-[100vh]">
-      <section className=" w-full sm:w-[50%] px-[5%] flex justify-center items-center ">
+      <section className=" h-[100vh] sm:h-auto w-full sm:w-[50%] px-[5%] flex justify-center items-center ">
         <div>
           <div className=" text-center">
             <h1 className=" font-semibold text-[1.9rem] sm:text-[1.7rem] xxl:text-[1.9rem] text-Gray900 ">

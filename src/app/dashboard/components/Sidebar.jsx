@@ -1,11 +1,18 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { RiHome6Line } from "react-icons/ri";
 import Avatar from "../assets/Avatar.png";
+import courses from "../assets/courses.png";
+import students from "../assets/students.png";
+import wallets from "../assets/wallets.png";
+import home from "../assets/home.png";
+import support from "../assets/support.png";
+import settings from "../assets/settings.png";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const [user, setUser] = useState("");
@@ -14,8 +21,12 @@ export default function Sidebar() {
     // Retrieve user data from localStorage
     const user = localStorage.getItem("user");
     console.log(JSON.parse(user));
-    setUser(JSON.parse(user)); 
-}, []);
+    setUser(JSON.parse(user));
+  }, []);
+
+  const pathname = usePathname();
+  const currentRoute = pathname;
+
   return (
     <div className=" hidden sm:block fixed top-0 bottom-0 px-[2%]  w-[20%] bg-ButtonColor h-[100vh] ">
       <section className=" relative text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-NormalWhite mt-12 xxl:mt-16 ">
@@ -31,28 +42,39 @@ export default function Sidebar() {
         </div>
       </section>
 
-      <section className=" mt-4 flex flex-col py-4 gap-4 text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-Gray100 font-semibold">
-        <Link href="/dashboard" className=" flex gap-2 items-center ">
+      <section className=" mt-4 flex flex-col py-4  text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-Gray100 font-semibold">
+        <Link href="/dashboard" className={`flex gap-2 py-3 px-2 items-center ${
+            currentRoute === "/dashboard" ? "bg-Gray700 rounded-[6px] " : "bg-none"
+          } `}>
           <div className=" text-[1.1rem] ">
-            <RiHome6Line />
+            <Image src={home} alt="Home" />
           </div>
           <span>Home</span>
         </Link>
-        <Link href="/dashboard" className=" flex gap-2 items-center ">
+        <Link href="/dashboard" className={`flex gap-2 py-3 px-2 items-center ${
+            currentRoute === "/dashboard/" ? "bg-Gray700 rounded-[6px] " : "bg-none"
+          } `}>
           <div className=" text-[1.1rem] ">
-            <RiHome6Line />
+            <Image src={courses} alt="Courses" />
           </div>
           <span>Courses</span>
         </Link>
-        <Link href="/dashboard/students" className=" flex gap-2 items-center ">
+        <Link
+          href="/dashboard/students"
+          className={`flex gap-2 py-3 px-2 items-center ${
+            currentRoute === "/dashboard/students" ? "bg-Gray700 rounded-[6px] " : "bg-none"
+          } `}
+        >
           <div className=" text-[1.1rem] ">
-            <RiHome6Line />
+            <Image src={students} alt="Students" />
           </div>
           <span>Students</span>
         </Link>
-        <Link href="/dashboard" className=" flex gap-2 items-center ">
+        <Link href="/dashboard" className={`flex gap-2 py-3 px-2 items-center ${
+            currentRoute === "/dashboard/" ? "bg-Gray700 rounded-[6px] " : "bg-none"
+          } `}>
           <div className=" text-[1.1rem] ">
-            <RiHome6Line />
+            <Image src={wallets} alt="Wallets" />
           </div>
           <span>Wallet</span>
         </Link>
@@ -60,16 +82,16 @@ export default function Sidebar() {
 
       {/* down part */}
       <div className=" absolute bottom-[5%] text-[0.7rem] md:text-[0.8rem] lg:text-[0.95rem] xxl:text-base flex flex-col gap-5 xxl:gap-6 ">
-        <section className=" mt-10 flex flex-col gap-4 text-Gray100 font-semibold">
+        <section className=" mt-10 flex flex-col gap-5 text-Gray100 font-semibold">
           <Link href="/dashboard" className=" flex gap-2 items-center ">
             <div className=" text-[1.1rem] ">
-              <RiHome6Line />
+              <Image src={support} alt="Support" />
             </div>
             <span>Support</span>
           </Link>
           <Link href="/dashboard" className=" flex gap-2 items-center ">
             <div className=" text-[1.1rem] ">
-              <RiHome6Line />
+              <Image src={settings} alt="Settings" />
             </div>
             <span>Settings</span>
           </Link>

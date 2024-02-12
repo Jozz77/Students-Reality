@@ -121,7 +121,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className=" w-full sm:w-[42%] lg:w-[37%] flex flex-col justify-center px-[10%] sm:px-[3%] xl:px-[5%] ">
+      <section className="  h-[100vh] sm:h-auto w-full sm:w-[42%] lg:w-[37%] flex flex-col justify-center px-[10%] sm:px-[3%] xl:px-[5%] ">
         <h2 className=" font-semibold text-[1.9rem] sm:text-[1.7rem] lg:text-[1.9rem] text-Gray900 ">Sign up</h2>
 
         <form

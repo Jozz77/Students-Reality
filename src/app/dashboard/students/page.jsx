@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
@@ -10,24 +10,41 @@ import { IoFilterSharp } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
 import { StudentsData } from "../StudentsData";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdOutlineClose } from "react-icons/md";
+import { RiHome6Line } from "react-icons/ri";
 import Image from "next/image";
 import Avatar from "../assets/Avatar.png";
-
+import Link from "next/link";
 
 export default function students() {
   const [user, setUser] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     // Retrieve user data from localStorage
     const user = localStorage.getItem("user");
     console.log(JSON.parse(user));
-    setUser(JSON.parse(user)); 
-}, []);
+    setUser(JSON.parse(user));
+  }, []);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <DashboardLayout>
       <main className="overflow-x-auto bg-NormalWhite  rounded-l-[0px] sm:rounded-l-[40px] h-[100vh] pt-6 xxl:pt-8 px-[3%] ">
         <section className="flex justify-between items-center sm:hidden">
-          <div className=" text-[2rem] ">
-            <GiHamburgerMenu />
+          <div onClick={toggleMenu}>
+            {isOpen ? (
+              <div className=" text-[2rem] ">
+                <MdOutlineClose />
+              </div>
+            ) : (
+              <div className=" text-[2rem] ">
+                <GiHamburgerMenu />
+              </div>
+            )}
           </div>
           <div className=" flex gap-2 items-center ">
             <div className=" w-[2rem]">
@@ -38,17 +55,87 @@ export default function students() {
               <small className="">{user.email}</small>
             </div>
           </div>
+
+          {/* mobile nav starts */}
+        {isOpen && (
+          <div className=" block sm:hidden absolute top-100 left-0 bottom-0 px-[2%] w-[50%] bg-ButtonColor h-[100vh] ">
+          <section className=" relative text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-NormalWhite mt-12 xxl:mt-16 ">
+            <input
+              type="text"
+              className=" rounded-[6px] w-full outline-none py-1 lg:py-2 pl-[20%] lg:pl-[15%]  bg-Gray700 placeholder:text-NormalWhite "
+              name=""
+              id=""
+              placeholder="Search"
+            />
+            <div className=" absolute left-[5%] lg:left-[3%] top-[50%] translate-y-[-50%] ">
+              <FiSearch />
+            </div>
+          </section>
+
+          <section className=" mt-4 flex flex-col py-4 gap-4 text-[0.8rem] lg:text-[0.9rem] xxl:text-base text-Gray100 font-semibold">
+            <Link href="/dashboard" className=" flex gap-2 items-center ">
+              <div className=" text-[1.1rem] ">
+                <RiHome6Line />
+              </div>
+              <span>Home</span>
+            </Link>
+            <Link href="/dashboard" className=" flex gap-2 items-center ">
+              <div className=" text-[1.1rem] ">
+                <RiHome6Line />
+              </div>
+              <span>Courses</span>
+            </Link>
+            <Link
+              href="/dashboard/students"
+              className=" flex gap-2 items-center "
+            >
+              <div className=" text-[1.1rem] ">
+                <RiHome6Line />
+              </div>
+              <span>Students</span>
+            </Link>
+            <Link href="/dashboard" className=" flex gap-2 items-center ">
+              <div className=" text-[1.1rem] ">
+                <RiHome6Line />
+              </div>
+              <span>Wallet</span>
+            </Link>
+          </section>
+
+          {/* down part */}
+          <div className=" absolute bottom-[5%] text-[0.7rem] md:text-[0.8rem] lg:text-[0.95rem] xxl:text-base flex flex-col gap-5 xxl:gap-6 ">
+            <section className=" mt-10 flex flex-col gap-4 text-Gray100 font-semibold">
+              <Link href="/dashboard" className=" flex gap-2 items-center ">
+                <div className=" text-[1.1rem] ">
+                  <RiHome6Line />
+                </div>
+                <span>Support</span>
+              </Link>
+              <Link href="/dashboard" className=" flex gap-2 items-center ">
+                <div className=" text-[1.1rem] ">
+                  <RiHome6Line />
+                </div>
+                <span>Settings</span>
+              </Link>
+            </section>
+          </div>
+        </div>
+        )}
+        {/* mobile nav ends */}
         </section>
+
+        
+
         <section className=" border-Gray200 border-t-[1px] sm:border-none pt-2 sm:pt-0 mt-3 sm:mt-0 flex justify-between items-center">
           <div>
             <h1 className=" font-semibold text-[1.2rem] sm:text-[1.4rem] md:text-[1.5rem] lg:text-[1.7rem] xxl:text-[1.9rem] ">
               Students
             </h1>
-            <p className=" text-Gray600 text-[0.65rem] w-[80%] sm:w-full sm:text-[0.75rem] md:text-[0.8rem] lg:text-[0.9rem]  xxl:text-base">
+            <p className=" text-Gray600 text-[0.7rem] w-[90%] sm:w-full sm:text-[0.75rem] md:text-[0.8rem] lg:text-[0.9rem]  xxl:text-base">
               View and manage all your students from this portal
             </p>
           </div>
-          <div className=" text-[0.65rem] sm:text-[0.7rem] md:text-[0.75rem] xl:text-[0.8rem] xxl:text-[0.9rem] items-center font-medium cursor-pointer flex gap-2 rounded-[6px] bg-ButtonColor text-NormalWhite py-2 px-2 md:px-3 xl:px-4 ">
+          <div className=" text-[0.65rem] sm:text-[0.7rem] md:text-[0.75rem] xl:text-[0.8rem] xxl:text-[0.9rem] items-center font-medium cursor-pointer flex gap-2 rounded-[6px] bg-ButtonColor text-NormalWhite py-2 px-2 sm:px-2 md:px-3 xl:px-4 ">
             <div className=" text-[0.9rem] md:text-[1rem] xl:text-[1.1rem]">
               <FiPlus />
             </div>
@@ -71,14 +158,19 @@ export default function students() {
           </div>
         </section>
 
-        <section className="mt-4 sm:mt-6 overflow-x-auto xxl:mt-8 border-Gray200 shadow-sm border-[1px] border-solid  rounded-[8px] ">
-          <div className=" flex min-w-[400px] justify-between py-2 xxl:py-3 px-[2%] ">
-            <section className=" flex justify-between  lg:w-[35%] w-[45%] md:w-[40%] xl:w-[30%] text-Gray700 text-[0.6rem] sm:text-[0.7rem] md:text-[0.75rem] lg:text-[0.8rem] xxl:text-[0.9rem] font-medium  rounded-[8px] border-Gray200 border-[1px] border-solid">
-              <span className="text-center py-1 sm:py-2 w-[33.3%]">View all</span>
+        <section className="mt-4 sm:mt-6  overflow-x-auto xxl:mt-8 border-Gray200 shadow-sm border-[1px] border-solid  rounded-[8px] ">
+         <div className="min-w-[550px]">
+         <div className=" flex justify-between py-2 xxl:py-3 px-[2%] ">
+            <section className=" flex justify-between  lg:w-[35%] w-[45%] md:w-[40%] xl:w-[30%] text-Gray700 text-[0.7rem] sm:text-[0.7rem] md:text-[0.75rem] lg:text-[0.8rem] xxl:text-[0.9rem] font-medium  rounded-[8px] border-Gray200 border-[1px] border-solid">
+              <span className="text-center py-1 sm:py-2 w-[33.3%]">
+                View all
+              </span>
               <span className="w-[33.3%] text-center py-1 sm:py-2 border-Gray200 border-x-[1px] border-solid justify-self-center">
                 cohort
               </span>
-              <span className="w-[33.3%] text-center py-1 sm:py-2">course type</span>
+              <span className="w-[33.3%] text-center py-1 sm:py-2">
+                course type
+              </span>
             </section>
             <section className=" flex items-center justify-between w-[46%] ">
               <div className=" relative w-[70%] sm:w-[78%] text-[0.6rem] sm:text-[0.65rem] md:text-[0.7rem] lg:text-[0.8rem] xxl:text-[0.9rem] xxl:text-base ">
@@ -102,7 +194,7 @@ export default function students() {
             </section>
           </div>
           <div className="overflow-x-auto ">
-            <table className=" table-auto min-w-[500px] w-full text-left text-Gray500 text-[0.6rem] md:text-[0.7rem] lg:text-[0.75rem] xl:text-[0.8rem]">
+            <table className=" table-auto  w-full text-left text-Gray500 text-[0.7rem] md:text-[0.7rem] lg:text-[0.75rem] xl:text-[0.8rem]">
               <thead className=" bg-Gray50    font-medium  ">
                 <tr className=" justify-around border-Gray200 border-t-[1px] border-solid  ">
                   <th className=" flex gap-2 ml-[6%] py-2 ">
@@ -113,7 +205,7 @@ export default function students() {
                   <th>Date Joined</th>
                   <th className="  pl-2 sm:pl-4 lg:pl-6 ">Cohort</th>
                   <th className="  pl-2 sm:pl-4 lg:pl-6 ">Status</th>
-                  <th className="  pl-5 sm:pl-10 lg:pl-16 "></th>
+                  <th className="  pl-10 lg:pl-16 "></th>
                 </tr>
               </thead>
               <tbody className=" ">
@@ -130,7 +222,9 @@ export default function students() {
                     </td>
                     <td>{student.course}</td>
                     <td>{student.date}</td>
-                    <td className="  pl-2 sm:pl-4 lg:pl-6 ">{student.cohort}</td>
+                    <td className="  pl-2 sm:pl-4 lg:pl-6 ">
+                      {student.cohort}
+                    </td>
                     <td className="relative pl-2 sm:pl-4 lg:pl-6 ">
                       <div
                         className={` absolute flex gap-1 py-1 px-2 top-[50%] translate-y-[-50%] items-center rounded-[16px] ${
@@ -145,7 +239,7 @@ export default function students() {
                         {student.status}
                       </div>
                     </td>
-                    <td className=" text-[1.2rem] pl-5 sm:pl-10 lg:pl-16 ">
+                    <td className=" text-[1.2rem] pl-10 lg:pl-16 ">
                       <BiDotsVerticalRounded />
                     </td>
                   </tr>
@@ -153,9 +247,10 @@ export default function students() {
               </tbody>
             </table>
           </div>
+         </div>
         </section>
 
-        <section className="mt-8 xxl:mt-10 relative mb-2 sm:mb-16 ">
+        <section className="mt-6 sm:mt-8 xxl:mt-10 relative mb-2 sm:mb-16 pb-6 ">
           <div className="flex absolute translate-x-[-50%] text-Gray700 font-semibold text-[0.6rem] sm:text-[0.7rem] md:text-[0.8rem] xxl:text-[0.9rem] left-[50%] top-[50%] translate-y-[-50%] justify-center items-center border-Gray200 border-[1px] border-solid  rounded-[8px]">
             <button className="flex gap-2 items-center py-2 px-2 md:py-3 text-center border-Gray200 border-r-[1px] border-solid">
               <div>
