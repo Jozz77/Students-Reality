@@ -145,8 +145,8 @@ export default function students() {
               View and manage all your students from this portal
             </p>
           </div>
-          <div className=" text-[0.85rem] mt-3 sm:mt-0 sm:text-[0.7rem] md:text-[0.75rem] xl:text-[0.8rem] xxl:text-[0.9rem] items-center font-medium cursor-pointer flex gap-2 rounded-[6px] bg-ButtonColor text-NormalWhite py-2 px-4 sm:px-2 md:px-3 xl:px-4 ">
-            <div className="  text-[0.9rem] md:text-[1rem] xl:text-[1.1rem]">
+          <div className=" text-[0.85rem] mt-3 sm:mt-0 sm:text-[0.7rem] md:text-[0.75rem] xl:text-[0.8rem] xxl:text-[0.9rem] items-center font-medium cursor-pointer flex gap-2 rounded-[6px] bg-ButtonColor text-NormalWhite py-3 px-4 sm:px-2 md:px-3 xl:px-4 ">
+            <div className="  text-[1.1rem] md:text-[1rem] xl:text-[1.1rem]">
               <FiPlus />
             </div>
             <p>Add Students</p>
