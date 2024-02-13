@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a [Next.js](https://nextjs.org/) application designed for [brief description of the purpose of the application].
+This project is a [Next.js](https://nextjs.org/) application designed for [managing students].
 
 ## Prerequisites
 
@@ -26,6 +26,41 @@ git clone https://github.com/Jozz77/Students-Reality.git
 ```bash
 cd Students-Reality
 ```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Usage
+
+To run the project locally, use the following command:
+
+```bash
+npm run dev
+```
+
+This will start the development server. Open http://localhost:3000 to view it in your browser.
+
+
+### Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+- Fork the Project
+- Create your Feature Branch (git checkout -b feature/AmazingFeature)
+- Commit your Changes (git commit -m 'Add some AmazingFeature')
+- Push to the Branch (git push origin feature/AmazingFeature)
+- Open a Pull Request
+
+### Contact
+[Jonathan Mmadu] - [mmadujonathan@gmail.com]
+
+Project Live Link: [Live Link](https://students-reality.vercel.app/)
+
+
+
 
 
 
