@@ -19,4 +19,13 @@ To get a local copy up and running follow these simple steps.
 
 ```bash
 git clone https://github.com/Jozz77/Students-Reality.git
+```
+
+### Navigate to the project directory
+
+```bash
+cd Students-Reality
+```
+
+
 
